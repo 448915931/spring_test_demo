@@ -2,6 +2,7 @@ package com.tqf;
 
 import com.tqf.config.TestComponentScanConfig;
 import com.tqf.domain.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
@@ -50,11 +51,16 @@ public class MyApplication {
 		AnnotationConfigApplicationContext applicationContext2 = new AnnotationConfigApplicationContext(TestComponentScanConfig.class);
 		BeanTestDomain6 beanTestDomain6 = (BeanTestDomain6)applicationContext2.getBean("beanTestDomain6");
 		beanTestDomain6.testa();
+		Hello hello = (Hello)applicationContext2.getBean("hello");
+		hello.sayHello();
+
+		AutowriedTest autowriedTest = (AutowriedTest) applicationContext2.getBean("autowriedTest");
+		autowriedTest.getTest();
 //		//获取所有被注入容器的bean名称
-//		String[] definitionNames = applicationContext2.getBeanDefinitionNames();
-// 		for (String name : definitionNames) {
-// 			System.out.println(name);
-//		}
+		String[] definitionNames = applicationContext2.getBeanDefinitionNames();
+ 		for (String name : definitionNames) {
+ 			System.out.println(name);
+		}
 		//测试aop切面
 //		AnnotationConfigApplicationContext applicationContext2 = new AnnotationConfigApplicationContext(TestComponentScanConfig.class);
 //		MathCalculator mathCalculator = (MathCalculator)applicationContext2.getBean("mathCalculator");

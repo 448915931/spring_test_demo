@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 public class TestDomain3 {
 
 	public String sayHello(String name){
-		return "你好，我是使用@Component注解注入的对象："+name;
+		System.out.println("你好，我是使用@Component注解注入的对象："+name);
+		return "";
 	}
 }
