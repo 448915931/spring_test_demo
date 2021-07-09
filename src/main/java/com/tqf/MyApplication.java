@@ -1,7 +1,10 @@
 package com.tqf;
 
+import com.myselfDi.TestDi;
 import com.tqf.config.TestComponentScanConfig;
+import com.tqf.di.IndependentDi;
 import com.tqf.domain.*;
+import org.aspectj.weaver.ast.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -61,6 +64,21 @@ public class MyApplication {
  		for (String name : definitionNames) {
  			System.out.println(name);
 		}
+
+		try {
+			IndependentDi.registerByClass(applicationContext2, "testDi", TestDi.class);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		definitionNames = applicationContext2.getBeanDefinitionNames();
+		for (String name : definitionNames) {
+			System.out.println(name);
+		}
+		TestDi testDi = (TestDi) applicationContext2.getBean("testDi");
+		System.out.println(testDi.test());
+
+
 		//测试aop切面
 //		AnnotationConfigApplicationContext applicationContext2 = new AnnotationConfigApplicationContext(TestComponentScanConfig.class);
 //		MathCalculator mathCalculator = (MathCalculator)applicationContext2.getBean("mathCalculator");
